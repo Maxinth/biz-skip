@@ -2,7 +2,7 @@ import SkipImg from "../assets/skip-img.png";
 
 const SkipCard = () => {
   return (
-    <div className="bg-[#1c1c1c] p-[26px] rounded-lg w-fit relative">
+    <div className="bg-[#1c1c1c] p-[26px] rounded-lg w-fit relative cursor-pointer">
       <img src={SkipImg} alt="skip image item" />
       <span className="absolute top-12 right-12 bg-[#0037c1] text-white text-sm font-medium rounded-full px-3 py-1">
         4 Yards

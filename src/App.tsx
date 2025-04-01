@@ -11,7 +11,10 @@ function App() {
           Select the skip size that best suits your needs
         </p>
       </div>
-      <SkipCard />
+      <section className="grid grid-cols-2 gap-4">
+        <SkipCard />
+        <SkipCard />
+      </section>
     </main>
   );
 }
