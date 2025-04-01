@@ -1,5 +1,5 @@
 import "./App.css";
-
+import SkipCard from "./components/SkipCard";
 function App() {
   return (
     <main className="text-3xl bg-[#121212] h-screen">
@@ -11,6 +11,7 @@ function App() {
           Select the skip size that best suits your needs
         </p>
       </div>
+      <SkipCard />
     </main>
   );
 }
