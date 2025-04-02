@@ -48,7 +48,6 @@ I've developed only the skip selection view and interactions therein as requeste
 1. Open `http://localhost:5173/` in your browser.
 2. Browse available skips.
 3. Select a skip to view more details in the drawer.
-4. Click **Continue** to proceed.
 
 ## Project Structure
 
