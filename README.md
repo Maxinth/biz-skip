@@ -1,8 +1,12 @@
 # Skip Selection Page
 
-This is a **Skip Selection Page** built with **React (TypeScript), Tailwind CSS, Framer Motion, and Chakra UI**. It allows users to browse available skip sizes, select one, I've set it up so that a user can select a skip size and the drawer will open to show the details of the selected skip.
-
+This is a **Skip Selection Page** built with **React (TypeScript), Tailwind CSS, Framer Motion, and Chakra UI**.
 I've developed only the skip selection view and interactions therein as requested in the outline for the assessment.
+
+-It allows users to browse available skip sizes, select just one at a time,
+-I've set it up so that a user can select a skip size and the drawer will open to show the details of the selected skip.
+-Users can also unselect a size if they wish by tapping the same button they used to select the size.
+-As a Ux improvement, I've added an option to close the drawer directly from the drawer section - should a user decide not to continue.
 
 ## Features
 
