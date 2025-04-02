@@ -6,7 +6,9 @@ interface ISkipCard {
   size: number;
   price_before_vat: number;
   hire_period_days: number;
-  handleClick: () => void;
+  handleClick: (id: number) => void;
+  id: number;
+  selectedSkipId: number | unknown;
 }
 
 const SkipCard = ({
@@ -14,9 +16,18 @@ const SkipCard = ({
   price_before_vat,
   hire_period_days,
   handleClick,
+  selectedSkipId,
+  id,
 }: ISkipCard) => {
+  const isSelected = selectedSkipId === id;
   return (
-    <div className="rounded-lg w-fit relative  cursor-pointer group  border-2 p-4 md:p-6 transition-all border-[#2A2A2A] hover:border-[#0037C1]/50 bg-[#1C1C1C] text-white ">
+    <div
+      className={`${
+        isSelected
+          ? "border-blue-700"
+          : "border-[#2A2A2A] hover:border-[#0037C1]/50 bg-[#1C1C1C] "
+      } rounded-lg w-fit relative  cursor-pointer group  border-2 p-4 md:p-6 transition-all  text-white `}
+    >
       <div className="relative w-full">
         <img
           src={SkipImg}
@@ -45,10 +56,20 @@ const SkipCard = ({
           </span>
         </p>
         <button
-          onClick={handleClick}
-          className="outline-none bg-[#2a2a2a] text-white text-base flex items-center justify-center w-full py-2.5 md:py-3 px-4 rounded-md transition-all  space-x-2 hover:bg-[#3A3A3A] hover:border-[#0037C1] p-3  cursor-pointer "
+          onClick={() => handleClick(id)}
+          className={`outline-none ${
+            isSelected
+              ? "bg-blue-700 hover:bg-blue-900"
+              : "bg-[#2a2a2a] hover:bg-[#3A3A3A] hover:border-[#0037C1]"
+          } text-white text-base flex items-center justify-center w-full py-2.5 md:py-3 px-4  ease-in-out duration-200 rounded-md transition-all  space-x-2  p-3  cursor-pointer `}
         >
-          Select this skip <FaArrowRight className="text-base ml-2" />
+          {isSelected ? (
+            <span className="text-white">Selected</span>
+          ) : (
+            <>
+              Select this skip <FaArrowRight className="text-base ml-2" />
+            </>
+          )}
         </button>
       </div>
     </div>

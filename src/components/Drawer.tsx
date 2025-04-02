@@ -1,16 +1,14 @@
 import { IoMdClose } from "react-icons/io";
 
-const Drawer = ({
-  closeDrawer,
-  showDrawer,
-}: {
+interface IDrawer {
   closeDrawer: () => void;
   showDrawer: boolean;
-}) => {
-  console.log({ showDrawer });
+  skipSize: number | null;
+}
+const Drawer = ({ closeDrawer, showDrawer, skipSize }: IDrawer) => {
   return (
     <div
-      className={`text-white w-full bg-[#1c1c1c] p-5 fixed bottom-0 left-0 right-0 z-[1000] duration-400 transition-all ease-in-out ${
+      className={`text-white w-full bg-[#1c1c1c] p-5 fixed bottom-0 left-0 right-0 z-[1000] duration-00 transition-all ease-in-out ${
         !showDrawer ? "translate-y-full" : "translate-y-0 "
       }`}
     >
@@ -19,6 +17,7 @@ const Drawer = ({
         onClick={closeDrawer}
       />
       Drawer
+      <div>{skipSize}</div>
     </div>
   );
 };

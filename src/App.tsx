@@ -2,16 +2,31 @@ import "./App.css";
 import SkipCard from "./components/SkipCard";
 import { mockData } from "./components/data";
 import Drawer from "./components/Drawer";
-import {
-  useState,
-  // useEffect
-} from "react";
+import { useState, useEffect } from "react";
 function App() {
   const [data] = useState(mockData);
   const [showDrawer, setShowDrawer] = useState(false);
+  const [selectedSkipId, setSelectedSkipId] = useState<unknown | number>(null);
+  const selectedSkipSize =
+    data?.find((skip) => skip.id === selectedSkipId)?.size || null;
 
   const closeDrawer = () => setShowDrawer(false);
-  const handleClick = () => setShowDrawer(true);
+  const handleClick = (id: number) => {
+    if (selectedSkipId === id) {
+      setSelectedSkipId(null);
+      closeDrawer();
+    } else {
+      setSelectedSkipId(id);
+    }
+  };
+
+  useEffect(() => {
+    if (selectedSkipId) {
+      setShowDrawer(true);
+    }
+  }, [selectedSkipId]);
+
+  console.log({ selectedSkipSize });
 
   // useEffect(() => {
   //   async function fetchData() {
@@ -38,11 +53,20 @@ function App() {
 
         <section className="grid max-w-6xl mx-auto sm:grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))] md:grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))]  gap-4">
           {data?.map((item) => (
-            <SkipCard key={item.id} {...item} handleClick={handleClick} />
+            <SkipCard
+              key={item.id}
+              {...item}
+              handleClick={handleClick}
+              selectedSkipId={selectedSkipId}
+            />
           ))}
         </section>
       </section>
-      <Drawer closeDrawer={closeDrawer} showDrawer={showDrawer} />
+      <Drawer
+        closeDrawer={closeDrawer}
+        showDrawer={showDrawer}
+        skipSize={selectedSkipSize}
+      />
     </main>
   );
 }
