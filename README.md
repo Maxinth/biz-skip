@@ -1,6 +1,6 @@
 # Skip Selection Page
 
-This is a **Skip Selection Page** built with **React (TypeScript), Tailwind CSS, Framer Motion, and Chakra UI**.
+This is a **Skip Selection Page** built with **React (TypeScript), Tailwind CSS, Framer Motion**.
 I've developed only the skip selection view and interactions therein as requested in the outline for the assessment.
 
 -It allows users to browse available skip sizes, select just one at a time,
@@ -18,7 +18,7 @@ I've developed only the skip selection view and interactions therein as requeste
 
 ## Tech Stack
 
-- **Frontend**: React (TypeScript), Tailwind CSS, Chakra UI
+- **Frontend**: React (TypeScript), Tailwind CSS
 - **State Management**: React hooks
 - **Animations**: Framer Motion
 - **API Handling**: Fetch API
