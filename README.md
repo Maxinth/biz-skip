@@ -50,7 +50,7 @@ I've developed only the skip selection view and interactions therein as requeste
 3. Select a skip to view more details in the drawer.
 4. Click **Continue** to proceed.
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 ├── src/
@@ -67,14 +67,14 @@ I've developed only the skip selection view and interactions therein as requeste
 ├── README.md        # Project documentation
 ```
 
-## 🔧 API Endpoint
+## API Endpoint
 
 - The app fetches skip data from:
   ```sh
   https://app.wewantwaste.co.uk/api/skips/by-location?postcode=NR32&area=Lowestoft
   ```
 
-## 🎨 UI Components
+## UI Components
 
 - **SkipCard**: Displays skip details.
 - **Drawer**: Bottom drawer for selected skip info.
