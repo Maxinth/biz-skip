@@ -1,6 +1,25 @@
 import "./App.css";
 import SkipCard from "./components/SkipCard";
+import { mockData } from "./components/data";
+import {
+  useState,
+  // useEffect
+} from "react";
 function App() {
+  const [data] = useState(mockData);
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const response = await fetch(
+  //       "https://app.wewantwaste.co.uk/api/skips/by-location?postcode=NR32&area=Lowestoft"
+  //     );
+  //     if (!response.ok) throw new Error("Failed to fetch data");
+  //     return response.json();
+  //   }
+  //   fetchData().then((data) => console.log(data));
+  // }, []);
+
+  console.log({ data });
+
   return (
     <main className="text-3xl bg-[#121212] h-full !font-inter w-full">
       <section className="max-w-7xl mx-auto w-full px-2">
