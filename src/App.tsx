@@ -3,6 +3,7 @@ import SkipCard from "./components/SkipCard";
 import { mockData } from "./components/data";
 import Drawer from "./components/Drawer";
 import { useState, useEffect } from "react";
+// import { Loader } from "./components/Loader";
 function App() {
   const [data] = useState(mockData);
   const [showDrawer, setShowDrawer] = useState(false);
@@ -26,7 +27,12 @@ function App() {
     }
   }, [selectedSkipId]);
 
-  console.log({ selectedSkipSize });
+  useEffect(() => {
+    //* unselect skip when drawer is closed
+    if (!showDrawer) {
+      setSelectedSkipId(null);
+    }
+  }, [showDrawer]);
 
   // useEffect(() => {
   //   async function fetchData() {
@@ -50,7 +56,7 @@ function App() {
             Select the skip size that best suits your needs
           </p>
         </div>
-
+        {/* <Loader /> */}
         <section className="grid max-w-6xl mx-auto sm:grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))] md:grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))]  gap-4">
           {data?.map((item) => (
             <SkipCard
