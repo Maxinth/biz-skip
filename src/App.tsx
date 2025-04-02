@@ -58,8 +58,9 @@ function App() {
         </div>
         {/* <Loader /> */}
         <section className="grid max-w-6xl mx-auto sm:grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))] md:grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))]  gap-4">
-          {data?.map((item) => (
+          {data?.map((item, index) => (
             <SkipCard
+              index={index}
               key={item.id}
               {...item}
               handleClick={handleClick}

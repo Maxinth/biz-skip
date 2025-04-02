@@ -1,9 +1,11 @@
 import SkipImg from "../assets/skip-img.png";
 import { PrivatePropertyBadge } from "./PrivatePropertyBadge";
 import { FaArrowRight } from "react-icons/fa6";
-
+import { motion } from "framer-motion";
+import { useVariants } from "../hooks/useVariants";
 interface ISkipCard {
   size: number;
+  index: number;
   price_before_vat: number;
   hire_period_days: number;
   handleClick: (id: number) => void;
@@ -18,10 +20,14 @@ const SkipCard = ({
   handleClick,
   selectedSkipId,
   id,
+  index: cardIndex,
 }: ISkipCard) => {
   const isSelected = selectedSkipId === id;
+  const { skipCardVariant, variantProps } = useVariants();
   return (
-    <div
+    <motion.div
+      variants={skipCardVariant(2, cardIndex * 0.5)}
+      {...variantProps}
       className={`${
         isSelected
           ? "border-blue-700"
@@ -72,7 +78,7 @@ const SkipCard = ({
           )}
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
