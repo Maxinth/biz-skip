@@ -43,21 +43,26 @@ function App() {
   }, [showDrawer]);
 
   useEffect(() => {
-    setLoading(true);
-    async function fetchData() {
-      const response = await fetch(
-        "https://app.wewantwaste.co.uk/api/skips/by-location?postcode=NR32&area=Lowestoft"
-      );
-      if (!response.ok) throw new Error("Failed to fetch data");
-      return response.json();
-    }
-    fetchData()
-      .then((data) => {
-        setData(data);
+    const fetchSkips = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(
+          "https://app.wewantwaste.co.uk/api/skips/by-location?postcode=NR32&area=Lowestoft"
+        );
+        if (!response.ok) throw new Error("Failed to fetch data");
+        const result = await response.json();
+        setData(result);
         setError(false);
-      })
-      .catch(() => setError(true))
-      .finally(() => setLoading(false));
+      } catch (e) {
+        if (e) {
+          setError(true);
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSkips();
   }, []);
 
   return (
