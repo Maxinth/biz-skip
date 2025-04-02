@@ -18,8 +18,6 @@ function App() {
   //   fetchData().then((data) => console.log(data));
   // }, []);
 
-  console.log({ data });
-
   return (
     <main className="text-3xl bg-[#121212] h-full !font-inter w-full">
       <section className="max-w-7xl mx-auto w-full px-2">
@@ -33,12 +31,9 @@ function App() {
         </div>
 
         <section className="grid max-w-6xl mx-auto sm:grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))] md:grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))]  gap-4">
-          <SkipCard />
-          <SkipCard />
-          <SkipCard />
-          <SkipCard />
-          <SkipCard />
-          <SkipCard />
+          {data?.map((item) => (
+            <SkipCard key={item.id} {...item} />
+          ))}
         </section>
       </section>
     </main>
