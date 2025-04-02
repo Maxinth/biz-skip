@@ -3,15 +3,13 @@ import { PrivatePropertyBadge } from "./PrivatePropertyBadge";
 import { FaArrowRight } from "react-icons/fa6";
 import { motion } from "framer-motion";
 import { useVariants } from "../hooks/useVariants";
-interface ISkipCard {
-  size: number;
-  index: number;
-  price_before_vat: number;
-  hire_period_days: number;
+import { SkipData } from "../App";
+
+type ISkipCard = SkipData & {
   handleClick: (id: number) => void;
-  id: number;
-  selectedSkipId: number | unknown;
-}
+  selectedSkipId: number | null;
+  index: number;
+};
 
 const SkipCard = ({
   size,
@@ -32,7 +30,7 @@ const SkipCard = ({
         isSelected
           ? "border-blue-700"
           : "border-sec-gray hover:border-pri-blue/50 bg-[#1C1C1C] "
-      } rounded-lg w-fit relative  cursor-pointer group  border-2 p-4 md:p-6 transition-all  text-white `}
+      } rounded-lg relative  cursor-pointer group  border-2 p-4 md:p-6 transition-all w-full md:w-fit  text-white `}
     >
       <div className="relative w-full">
         <img
@@ -47,7 +45,7 @@ const SkipCard = ({
         {size} Yards
       </span>
 
-      <div className="mt-4 bg-[#1c1c1c]">
+      <div className="mt-4">
         <p className="mb-2 text-white  text-lg md:text-xl font-bold  ">
           {size} Yard Skip
         </p>

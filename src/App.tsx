@@ -1,13 +1,21 @@
 import "./App.css";
 import SkipCard from "./components/SkipCard";
-import { mockData } from "./components/data";
 import Drawer from "./components/Drawer";
 import { useState, useEffect } from "react";
-// import { Loader } from "./components/Loader";
+import { Loader } from "./components/Loader";
+
+export interface SkipData {
+  id: number;
+  size: number;
+  price_before_vat: number;
+  hire_period_days: number;
+}
 function App() {
-  const [data] = useState(mockData);
+  const [data, setData] = useState<SkipData[]>([]);
   const [showDrawer, setShowDrawer] = useState(false);
-  const [selectedSkipId, setSelectedSkipId] = useState<unknown | number>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [selectedSkipId, setSelectedSkipId] = useState<number | null>(null);
   const selectedSkipSize =
     data?.find((skip) => skip.id === selectedSkipId)?.size || null;
 
@@ -34,20 +42,29 @@ function App() {
     }
   }, [showDrawer]);
 
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const response = await fetch(
-  //       "https://app.wewantwaste.co.uk/api/skips/by-location?postcode=NR32&area=Lowestoft"
-  //     );
-  //     if (!response.ok) throw new Error("Failed to fetch data");
-  //     return response.json();
-  //   }
-  //   fetchData().then((data) => console.log(data));
-  // }, []);
+  useEffect(() => {
+    setLoading(true);
+    async function fetchData() {
+      const response = await fetch(
+        "https://app.wewantwaste.co.uk/api/skips/by-location?postcode=NR32&area=Lowestoft"
+      );
+      if (!response.ok) throw new Error("Failed to fetch data");
+      return response.json();
+    }
+    fetchData()
+      .then((data) => {
+        setData(data);
+        setError(false);
+      })
+      .catch(() => setError(true))
+      .finally(() => setLoading(false));
+  }, []);
 
   return (
-    <main className="text-3xl bg-[#121212] h-full !font-inter w-full relative">
-      <section className="max-w-7xl mx-auto w-full px-2 pb-24">
+    <main
+      className={`text-3xl bg-[#121212] h-screen overflow-y-auto !font-inter w-full relative px-4`}
+    >
+      <section className={`max-w-7xl mx-auto w-full px-2 pb-24 `}>
         <div className=" flex items-center justify-center flex-col w-full mb-8">
           <h1 className="text-white text-2xl pt-12 mb-4 font-bold">
             Choose your skip size
@@ -56,18 +73,25 @@ function App() {
             Select the skip size that best suits your needs
           </p>
         </div>
-        {/* <Loader /> */}
-        <section className="grid max-w-6xl mx-auto sm:grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))] md:grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))]  gap-4">
-          {data?.map((item, index) => (
-            <SkipCard
-              index={index}
-              key={item.id}
-              {...item}
-              handleClick={handleClick}
-              selectedSkipId={selectedSkipId}
-            />
-          ))}
-        </section>
+        {loading && <Loader />}
+        {!loading && data?.length > 0 ? (
+          <section className="grid max-w-6xl mx-auto  grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))]  sm:grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))]  gap-4">
+            {data?.map((item: SkipData, index) => (
+              <SkipCard
+                index={index}
+                key={item.id}
+                {...item}
+                handleClick={handleClick}
+                selectedSkipId={selectedSkipId}
+              />
+            ))}
+          </section>
+        ) : null}
+        {error && (
+          <p className="text-white text-center h-[70vh] font-medium text-lg flex items-center justify-center">
+            Something went wrong 😫
+          </p>
+        )}
       </section>
       <Drawer
         closeDrawer={closeDrawer}
@@ -77,5 +101,4 @@ function App() {
     </main>
   );
 }
-
 export default App;
